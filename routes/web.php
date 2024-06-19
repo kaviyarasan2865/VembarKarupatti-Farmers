@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('index');
+});
+
 Route::group(['prefix'=>'admin'], function() {
 	Route::get('/login', [AdminController::class,'login'])->name('admin.login');
 	Route::post('/login', [AdminController::class,'loginVerify'])->name('login');

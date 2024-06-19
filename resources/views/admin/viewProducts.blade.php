@@ -4,6 +4,22 @@
 
 <div>
     <h2 class="text-center">Product List</h2>
+ <!-- Display any form validation errors and success messages -->
+ @if ($errors->any())
+ <div class="alert alert-danger">
+     <ul>
+         @foreach ($errors->all() as $error)
+             <li>{{ $error }}</li>
+         @endforeach
+     </ul>
+ </div>
+@endif
+
+@if (session('success'))
+ <div class="alert alert-success">
+     {{ session('success') }}
+ </div>
+@endif
 
     <div class="row">
         @foreach ($products as $product)
@@ -16,7 +32,7 @@
                         <p class="card-text">Price: INR {{ $product->price }}/kg</p>
                         <p class="card-text">Stock: {{ $product->stock }} kg</p>
                         <a href="{{route('edit.product',$product->id)}}" class="btn btn-primary">Edit Product</a>
-                        <a href="" class="btn btn-danger">Delete Product</a>
+                        <a href="{{route('delete.product',$product->id)}}" class="btn btn-danger">Delete Product</a>
                     </div>
                 </div>
             </div>

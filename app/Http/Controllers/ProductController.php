@@ -73,4 +73,59 @@ public function editProduct($id){
     // dd($product);
     return view('admin.editProduct', compact('product'));
 }
+
+public function updateProduct(Request $request, $id)
+{
+    $product = Product::findOrFail($id);
+
+    // Validate the form data
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0',
+        'image' => 'nullable|image|max:2048',
+        'image2' => 'nullable|image|max:2048',
+        'image3' => 'nullable|image|max:2048',
+    ]);
+
+    $imagePaths = [];
+
+    if ($request->hasFile('image')) {
+        $imagePaths['image'] = $request->file('image')->store('products', 'public');
+    }
+    if ($request->hasFile('image2')) {
+        $imagePaths['image2'] = $request->file('image2')->store('products', 'public');
+    }
+    if ($request->hasFile('image3')) {
+        $imagePaths['image3'] = $request->file('image3')->store('products', 'public');
+    }
+
+    // Update product data
+    $product->name = $request->name;
+    $product->description = $request->description;
+    $product->price = $request->price;
+    $product->stock = $request->stock;
+
+    if (isset($imagePaths['image'])) {
+        $product->image = $imagePaths['image'];
+    }
+    if (isset($imagePaths['image2'])) {
+        $product->image2 = $imagePaths['image2'];
+    }
+    if (isset($imagePaths['image3'])) {
+        $product->image3 = $imagePaths['image3'];
+    }
+
+    $product->save();
+
+    // Redirect to a success page or route
+    return redirect()->route('view.products')->with('success', 'Product updated successfully!');
+}
+
+public function deleteProduct($id){
+    $product = Product::findOrFail($id);
+    $product->delete();
+    return redirect()->route('view.products')->with('success', 'Product deleted successfully!');
+}
 }

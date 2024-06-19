@@ -16,14 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 
 
-Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', [AdminController::class, 'login'])->name('admin.login');
@@ -33,4 +33,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     Route::get('/view-products', [ProductController::class, 'viewProducts'])->name('view.products');
     Route::get('/edit-product/{id}', [ProductController::class, 'editProduct'])->name('edit.product');
+    Route::post('/update-product/{id}', [ProductController::class, 'updateProduct'])->name('update.product');
+    Route::get('/delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('delete.product');
 });

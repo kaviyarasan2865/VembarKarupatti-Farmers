@@ -14,7 +14,7 @@ class HomeController extends Controller
             $product->description = Str::limit($product->description, 50, '...'); // Adjust the limit as per your requirement
             return $product;
         });
-
+// dd($products);
         return view('welcome', compact('products'));
     }
 }

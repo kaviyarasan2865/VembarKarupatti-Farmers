@@ -31,13 +31,17 @@
         .hero-img {
             border-radius: 32%;
         }
-
-        .light {
+        .light{
             --tw-bg-opacity: 1;
             --tw-text-opacity: 1;
-            background: url('https://res.cloudinary.com/dght6acvp/image/upload/v1718799294/gradient_wopt1w.jpg');
             background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
             color: rgba(0, 0, 0, var(--tw-text-opacity));
+
+        }
+
+        #homeSection {
+            background: url('https://res.cloudinary.com/dght6acvp/image/upload/v1718799294/gradient_wopt1w.jpg');
+
         }
 
         .light .dark\:text-white {
@@ -124,7 +128,7 @@
                         </div>
                     </div>
                     <ul tabindex="0"
-                        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        class="menu light menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                         <li>
                             <a class="justify-between">
                                 Profile
@@ -139,7 +143,7 @@
         </div>
     </div>
 
-    <section class="min-h-screen mt-[70px]">
+    <section class="min-h-screen mt-[70px]" id="homeSection">
         <section class="relative pb-10 pt-20 md:pt-16 h-1527 px-32">
             <picture class="pointer-events-none absolute inset-x-0 top-0 -z-10 block dark:hidden h-full">
                 <img src="https://res.cloudinary.com/dght6acvp/image/upload/v1718799294/gradient_wopt1w.jpg" alt="gradient" class="h-full w-full" />
@@ -174,6 +178,32 @@
                 </div>
             </div>
         </section>
+    </section>
+
+    <section id="products">
+        <h1 class="text-jacarta-600 font-bold font-display mb-6 text-center text-5xl">
+            Products
+        </h1>
+        <div class="mt-10">
+            <div class="mx-auto sm:px-24 flex flex-row justify-around flex-wrap gap-10">
+                @foreach ($products as $product)
+                <div class="">
+                    <div class="card w-96 bg-base-100 shadow-xl light">
+                        <figure><img src="{{ asset('storage/' . $product->image) }}" class="h-44" alt="Karuppatty" /></figure>
+                        <div class="card-body">
+                          <h2 class="card-title">{{$product->name}}</h2>
+                          <p>{{$product->description}}</p>
+                            <b>$ {{$product->price}}</b>
+                          <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Buy Now</button>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                @endforeach
+
+            </div>
+        </div>
     </section>
 
     <footer class="footer light p-10 bg-base-200 text-base-content">

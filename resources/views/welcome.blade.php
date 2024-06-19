@@ -181,7 +181,29 @@
     </section>
 
     <section id="products">
+        <h1 class="text-jacarta-600 font-bold font-display mb-6 text-center text-5xl">
+            Products
+        </h1>
+        <div class="mt-10">
+            <div class="mx-auto sm:px-24 flex flex-row justify-around flex-wrap gap-10">
+                @foreach ($products as $product)
+                <div class="">
+                    <div class="card w-96 bg-base-100 shadow-xl light">
+                        <figure><img src="{{ asset('storage/' . $product->image) }}" class="h-44" alt="Karuppatty" /></figure>
+                        <div class="card-body">
+                          <h2 class="card-title">{{$product->name}}</h2>
+                          <p>{{$product->description}}</p>
+                            <b>$ {{$product->price}}</b>
+                          <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Buy Now</button>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                @endforeach
 
+            </div>
+        </div>
     </section>
 
     <footer class="footer light p-10 bg-base-200 text-base-content">

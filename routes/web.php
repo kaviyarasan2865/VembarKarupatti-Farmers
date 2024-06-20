@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-product/{id}', [ProductController::class, 'editProduct'])->name('edit.product');
     Route::post('/update-product/{id}', [ProductController::class, 'updateProduct'])->name('update.product');
     Route::get('/delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('delete.product');
+});
+
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/signup', [UserController::class, 'signup'])->name('user.signup');
+    Route::get('/register', [UserController::class, 'register'])->name('register.user');
+    Route::get('/login', [UserController::class, 'login'])->name('user.login');
 });

@@ -203,7 +203,7 @@
                     </div>
                 </div>
                 @endforeach
-
+{{-- Modal --}}
                 <dialog id="my_modal_2" class="modal">
                     <div class="modal-box light">
                         <form method="dialog">
@@ -229,7 +229,7 @@
                     document.getElementById('my_modal_2').showModal();
                 }
             </script>
-            
+
         </div>
     </section>
 

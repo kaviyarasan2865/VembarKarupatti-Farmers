@@ -189,20 +189,47 @@
                 @foreach ($products as $product)
                 <div class="">
                     <div class="card w-96 bg-base-100 shadow-xl light">
-                        <figure><img src="{{ asset('storage/' . $product->image) }}" class="h-44" alt="Karuppatty" /></figure>
+                        <figure>
+                            <img onclick="showModal({{ $product->id }}, '{{ $product->name }}', '{{ $product->description }}', '{{ asset('storage/' . $product->image) }}', {{ $product->price }})" src="{{ asset('storage/' . $product->image) }}" class="h-44 hover:scale-105 transition-all duration-200" alt="Karuppatty" />
+                        </figure>
                         <div class="card-body">
-                          <h2 class="card-title">{{$product->name}}</h2>
-                          <p>{{$product->description}}</p>
-                            <b>$ {{$product->price}}</b>
-                          <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Buy Now</button>
-                          </div>
+                            <h2 class="card-title">{{ $product->name }}</h2>
+                            <p>{{ $product->description }}</p>
+                            <b>$ {{ $product->price }}</b>
+                            <div class="card-actions justify-end">
+                                <button class="btn btn-primary">Buy Now</button>
+                            </div>
                         </div>
-                      </div>
+                    </div>
                 </div>
                 @endforeach
 
+                <dialog id="my_modal_2" class="modal">
+                    <div class="modal-box light">
+                        <form method="dialog">
+                            <button class="btn btn-sm btn-ghost absolute right-2 top-4">✕</button>
+                            <h3 class="font-bold text-lg" id="modal-title"></h3>
+                            <p class="py-4" id="modal-description"></p>
+                            <img id="modal-image" class="h-44 mx-auto" alt="Product Image">
+                            <b id="modal-price"></b>
+                        </form>
+                    </div>
+                    <form method="dialog" class="modal-backdrop">
+                        <button>close</button>
+                    </form>
+                </dialog>
             </div>
+
+            <script>
+                function showModal(id, name, description, imageUrl, price) {
+                    document.getElementById('modal-title').innerText = name;
+                    document.getElementById('modal-description').innerText = description;
+                    document.getElementById('modal-image').src = imageUrl;
+                    document.getElementById('modal-price').innerText = "$ " + price;
+                    document.getElementById('my_modal_2').showModal();
+                }
+            </script>
+            
         </div>
     </section>
 
